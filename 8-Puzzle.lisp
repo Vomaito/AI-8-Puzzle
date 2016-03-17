@@ -54,11 +54,13 @@
 (DEFUN INTEGERDIV (X Y)
   (SETQ
     AUXD X
+    COUNT 0
   )
   (LOOP
     ((< AUXD Y)
-      AUXD
+      COUNT
     )
+    (INCQ COUNT)
     (SETQ AUXD (- AUXD Y))
   )
 )
@@ -74,26 +76,22 @@
 )
 (DEFUN VALIDMOVE(NODO MOVE)
   ((EQUAL MOVE 'U)
-    (SETQ INDEX (GETINDEX NODO 0)
-      INIY (INTEGERDIV (ELEMENT_AT INDEX NODO) 3)
-    )
-    ((= INIY 0)
+    (SETQ INDEX (GETINDEX NODO 0))
+    ((< INDEX 3)
       NIL
     )
     T
   )
   ((EQUAL MOVE 'D)
-    (SETQ INDEX (GETINDEX NODO 0)
-      INIY (INTEGERDIV (ELEMENT_AT INDEX NODO) 3)
-    )
-    ((= INIY 2)
+    (SETQ INDEX (GETINDEX NODO 0))
+    ((> INDEX 5)
       NIL
     )
     T
   )
   ((EQUAL MOVE 'L)
     (SETQ INDEX (GETINDEX NODO 0)
-      INIX (MOD  (ELEMENT_AT INDEX NODO) 3)
+      INIX (MOD INDEX 3)
     )
     ((= INIX 0)
       NIL
@@ -102,7 +100,7 @@
   )
   ((EQUAL MOVE 'R)
     (SETQ INDEX (GETINDEX NODO 0)
-      INIX (MOD (ELEMENT_AT INDEX NODO) 3)
+      INIX (MOD INDEX 3)
     )
     ((= INIX 2)
       NIL
